@@ -1,3 +1,16 @@
+pacman::p_load('playwright')
+
+# Launch browser (headless mode by default)
+browser <- playwright::launch(headless = TRUE)
+
+# Open a new page
+page <- browser$new_page()
+
+# Step 1: Navigate to the World Bank API page
+page$goto("https://scorecard.worldbank.org/en/api")
+
+
+
 # Make the GET request to the World Bank API
 
 api_url<-'https://scorecard.worldbank.org/en/api'
