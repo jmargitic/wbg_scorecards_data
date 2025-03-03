@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 # Configure Chrome options for a visible window and automatic downloads
 chrome_options = Options()
@@ -14,7 +15,7 @@ chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--window-size=1280,800")
 
 # Set the download directory (update this to a valid folder on your system)
-download_dir = "/path/to/your/download/directory"
+download_dir = r"C:\Users\wb637397\OneDrive - WBG\ds_doo\2025\02\wbg_scorecards_data\fldr_in"
 prefs = {
     "download.default_directory": download_dir,  # Set download folder
     "download.prompt_for_download": False,         # Disable download prompt
@@ -24,6 +25,9 @@ prefs = {
 chrome_options.add_experimental_option("prefs", prefs)
 
 # Initialize the Chrome driver
+service = Service(r"C:\Users\wb637397\OneDrive - WBG\ds_doo\2025\02\wbg_scorecards_data\fldr_in\chrome.exe")
+driver = webdriver.Chrome(service=service, options=chrome_options)
+
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 wait = WebDriverWait(driver, 20)  # Explicit wait of up to 20 seconds
 

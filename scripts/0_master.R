@@ -1,5 +1,5 @@
 ############################################################################## #
-# WBG Scorecard 
+# Project: WBG Scorecard Data Cleaner
 # DOC:
 # Authors:
 #   - Juan Margitic (jmargitic@worldbank.org)
@@ -23,12 +23,14 @@ fldr_out<-str_c(fldr_main,'/out')
 fldr_scr<-str_c(fldr_main,'/scripts')
 
 # Creating sub-directories (if absent)
-ls() |> walk(~ fs::dir_create(.x))
+c(fldr_in, fldr_temp, fldr_out, fldr_scr) |> walk(~ fs::dir_create(.x))
 
 # 0.3 Options setting
 options(scipen=999)
 
 ###################################
-# 1. Sub-routine: Data-cleaning
-#source(str_c(fldr_scr,'/1_data_download.R'))
+# 1. Sub-routine: Data-Downloading
+#source(str_c(fldr_scr,'/1_data_download.R')) # This has been deprecated for now. Company policy states that we can't use Selenium tools with web-drivers
 
+# 2. Sub-routine: Data-Cleaning
+#source(str_c(fldr_scr,'/1_data_cleaning.R'))
