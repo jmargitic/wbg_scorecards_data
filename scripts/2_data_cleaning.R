@@ -10,7 +10,7 @@
 ############################################################################## #
 # 1. Unzipping main data files
 # 1.1. Zip File URL
-zip_url<-"C:/Users/wb637397/OneDrive - WBG/ds_doo/2025/02/wbg_scorecards_data/input/IndicatorData.zip"
+zip_url<-""
 # 1.2. Unzipping
 unzip(zip_url, exdir = str_c(fldr_temp,'/'), overwrite = TRUE)
 
