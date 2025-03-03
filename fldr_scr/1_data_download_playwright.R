@@ -1,7 +1,7 @@
 pacman::p_load('playwright')
 
 # Launch browser (headless mode by default)
-browser <- playwright::launch(headless = TRUE)
+browser <- playwrightr::browser_launch(headless = TRUE)
 
 # Open a new page
 page <- browser$new_page()

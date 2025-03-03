@@ -7,7 +7,7 @@
 # 0. Setting Up Environment 
 # 0.1 Package management
 rm(list=ls())
-install.packages('pacman')
+#install.packages('pacman')
 pacman::p_load(
   'tidyverse', # General Tidyverse tools
   'tidylog',   # Operations summary for Tidyverse tools

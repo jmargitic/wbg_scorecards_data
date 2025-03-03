@@ -47,3 +47,59 @@ cat("Download completed!")
 
 
 
+library(chromote)
+
+options(chromote.headless = FALSE)
+# Launch a Chromote session (headless mode by default)
+b <- ChromoteSession$new()
+
+# Step 1: Navigate to the World Bank API page
+b$Page$navigate("https://scorecard.worldbank.org/en/api")
+b$Page$loadEventFired()  # Wait until the page is fully loaded
+
+# Step 2: Click on the download data link using its CSS selector
+download_link_selector <- "a[href*='https://ext.api.worldbank.org/api/Scorecard/downloaddata']"
+js_click_download <- sprintf("document.querySelector('%s') && document.querySelector('%s').click();", 
+                             download_link_selector, download_link_selector)
+b$Runtime$evaluate(js_click_download)
+Sys.sleep(3)
+
+# Step 3: Click on the "Try it out" button
+# Since CSS doesn't support text matching directly, we loop through buttons and click the matching one.
+js_click_try_it <- "
+  Array.from(document.querySelectorAll('button')).forEach(btn => {
+    if(btn.innerText && btn.innerText.includes('Try it out')) { 
+      btn.click(); 
+    }
+  });
+"
+b$Runtime$evaluate(js_click_try_it)
+Sys.sleep(3)
+
+# Step 4: Click on the "Execute" button
+js_click_execute <- "
+  Array.from(document.querySelectorAll('button')).forEach(btn => {
+    if(btn.innerText && btn.innerText.includes('Execute')) { 
+      btn.click(); 
+    }
+  });
+"
+b$Runtime$evaluate(js_click_execute)
+Sys.sleep(30)  # Wait for results to be processed
+
+# Step 5: Click on the "Download file" button
+js_click_download_file <- "
+  Array.from(document.querySelectorAll('button')).forEach(btn => {
+    if(btn.innerText && btn.innerText.includes('Download file')) { 
+      btn.click(); 
+    }
+  });
+"
+b$Runtime$evaluate(js_click_download_file)
+Sys.sleep(5)  # Adjust if necessary to allow download to complete
+
+# Close the Chromote session
+b$close()
+
+cat("Download completed successfully!\n")
+
